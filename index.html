@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blouis.gr - Σύντομα κοντά σας</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        .countdown {
+            display: flex;
+            gap: 20px;
+            font-size: 1.5rem;
+        }
+        .countdown div {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Σύντομα θα είμαστε κοντά σας!</h1>
+    <p>Η νέα μας ιστοσελίδα είναι υπό κατασκευή.</p>
+    <div class="countdown">
+        <div><span id="days">0</span> ημέρες</div>
+        <div><span id="hours">0</span> ώρες</div>
+        <div><span id="minutes">0</span> λεπτά</div>
+        <div><span id="seconds">0</span> δευτ.</div>
+    </div>
+
+    <script>
+        // Ορισμός ημερομηνίας λανσαρίσματος
+        const launchDate = new Date("Dec 1, 2025 00:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown").innerHTML = "Η ιστοσελίδα μας είναι πλέον live!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
